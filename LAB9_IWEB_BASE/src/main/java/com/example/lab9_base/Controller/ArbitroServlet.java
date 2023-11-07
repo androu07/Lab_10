@@ -1,5 +1,7 @@
 package com.example.lab9_base.Controller;
 
+import com.example.lab9_base.Bean.Arbitro;
+import com.example.lab9_base.Dao.DaoArbitros;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -17,6 +19,7 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        Arbitro arbitro = new Arbitro();
 
         switch (action) {
 
@@ -27,9 +30,8 @@ public class ArbitroServlet extends HttpServlet {
                 break;
 
             case "guardar":
-                /*
-                Inserte su código aquí
-                */
+                DaoArbitros.crearArbitro(arbitro.getNombre(), arbitro.getPais());
+                response.sendRedirect("ArbitroServlet");
                 break;
 
         }
@@ -53,22 +55,20 @@ public class ArbitroServlet extends HttpServlet {
 
         switch (action) {
             case "lista":
-                /*
-                Inserte su código aquí
-                 */
+                ArrayList<Arbitro> arbitros = DaoArbitros.listarArbitros();
+                request.setAttribute("lista", arbitros);
                 view = request.getRequestDispatcher("/arbitros/list.jsp");
                 view.forward(request, response);
                 break;
             case "crear":
-                /*
-                Inserte su código aquí
-                */
-
+                view = request.getRequestDispatcher("/arbitros/list.jsp");
+                view.forward(request, response);
                 break;
             case "borrar":
-                /*
-                Inserte su código aquí
-                */
+                int arbitroId = Integer.parseInt(request.getParameter("idArbitro"));
+                if (DaoArbitros.buscarArbitro(arbitroId) != null) {
+                    DaoArbitros.borrarArbitro(arbitroId);
+                }
                 break;
         }
     }

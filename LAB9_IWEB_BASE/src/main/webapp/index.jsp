@@ -1,4 +1,7 @@
+<%@ page import="com.example.lab9_base.Bean.Partido" %>
+<%@page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="lista" type="ArrayList<Partido>" scope="request"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +10,7 @@
         <title>LAB 9</title>
     </head>
     <body>
+        <jsp:include page="/includes/navbar.jsp">
         <div class='container'>
             <div class="row mb-5 mt-4">
                 <div class="col-lg-6">
@@ -17,25 +21,46 @@
                 </div>
             </div>
             <table class="table">
-                <tr>
-                    <th>#</th>
-                    <th>Jornada</th>
-                    <th>Fecha</th>
-                    <th>Selección Local</th>
-                    <th>Selección Visitante</th>
-                    <th>Estadio a jugar</th>
-                    <th>Árbitro</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Jornada</th>
+                        <th>Fecha</th>
+                        <th>Selección Local</th>
+                        <th>Selección Visitante</th>
+                        <th>Estadio a jugar</th>
+                        <th>Árbitro</th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                <%
+                    int i = 1;
+                    for (Partido p : lista) {
+                %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%= i%>
+                    </td>
+                    <td><%= p.getIdPartido()%>
+                    </td>
+                    <td><%= p.getNumeroJornada()%>
+                    </td>
+                    <td><%= p.getFecha()%>
+                    </td>
+                    <td><%= p.getSeleccionLocal().getNombre()%>
+                    </td>
+                    <td><%= p.getSeleccionVisitante().getNombre()%>
+                    </td>
+                    <td><%= p.getSeleccionVisitante().getNombre()%>
+                    </td>
+                    <td><%= p.getArbitro().getNombre()%>
+                    </td>
                 </tr>
+                <%
+                        i++;
+                    }
+                %>
+                </tbody>
 
             </table>
         </div>

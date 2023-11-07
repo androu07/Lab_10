@@ -36,7 +36,7 @@ public class PartidoServlet extends HttpServlet {
         switch (action) {
             case "lista":
                 ArrayList<Partido> listaPartidos = daoPartidos.listaDePartidos();
-                request.setAttribute("lista", listaTrabajos);
+                request.setAttribute("lista", listaPartidos);
 
                 view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
