@@ -1,3 +1,4 @@
+<%@ page import="com.example.lab9_base.Bean.Arbitro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -41,9 +42,19 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                        <%
+                        int i = 1;
+                        for (Arbitro e : listaArbitros) {
+                    %>
+                <tr>
+                    <td><%= i%>
+                    </td>
+                    <td><%= e.getIdArbitro()%>
+                    </td>
+                    <td><%= e.getNombre()%>
+                    </td>
+                    <td><%= e.getPais()%>
+                    </td>
                     <td>
                         <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=">
                             Borrar
