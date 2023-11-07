@@ -19,6 +19,7 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        Arbitro arbitro = new Arbitro();
 
         switch (action) {
 
@@ -29,9 +30,8 @@ public class ArbitroServlet extends HttpServlet {
                 break;
 
             case "guardar":
-                /*
-                Inserte su código aquí
-                */
+                DaoArbitros.crearArbitro(arbitro.getNombre(), arbitro.getPais());
+                response.sendRedirect("ArbitroServlet");
                 break;
 
         }
@@ -56,7 +56,7 @@ public class ArbitroServlet extends HttpServlet {
         switch (action) {
             case "lista":
                 ArrayList<Arbitro> arbitros = DaoArbitros.listarArbitros();
-                request.setAttribute("lista", listaTrabajos);
+                request.setAttribute("lista", arbitros);
                 view = request.getRequestDispatcher("/arbitros/list.jsp");
                 view.forward(request, response);
                 break;
@@ -65,7 +65,7 @@ public class ArbitroServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "borrar":
-                int arbitroId = request.getParameter("idArbitro");
+                int arbitroId = Integer.parseInt(request.getParameter("idArbitro"));
                 if (DaoArbitros.buscarArbitro(arbitroId) != null) {
                     DaoArbitros.borrarArbitro(arbitroId);
                 }

@@ -82,7 +82,7 @@ public class DaoArbitros extends DaoBase{
         return arbitros;
     }
 
-    public void crearArbitro(String nombre, String pais) {
+    public static void crearArbitro(String nombre, String pais) {
         String sql = "INSERT INTO arbitro (nombre, pais) VALUES (?,?,?,?)";
 
         try {
